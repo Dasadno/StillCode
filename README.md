@@ -1,4 +1,4 @@
-# Code typing speedtest.
+# i need to think about title of this project :)
 
 ### Общая задумка
 
