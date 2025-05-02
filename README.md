@@ -1,4 +1,4 @@
-# i need to think about title of this project :)
+StillCode
 
 ### Общая задумка
 
