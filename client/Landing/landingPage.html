@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StillCode | Algorithmic Programming Challenges</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ei9eG5QQSKHcwas-1rT-alqkQmo_yWRCpzYPGRH43XpeR9nH_gU5GhQLqj-Guo3dWG1h8odKQc-ZK0662wYxWSSHUsYuykDiVtmXh51GOOvsgllvLYzzlEkI2yZ5Vfg2L_K3iVhDYp_P-k6CdcC0YwfqYesAdA-Y9ph2M0-sbNZ-oghxsTlxjOsiK3E5DA4D0DmZwEZsOmOkVt-xM5h89A" charset="UTF-8"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="landingPage.css">
+    <script src="LandingP.js"></script>
+  
+</head>
+<body class="text-light">
+    <header class="bg-darker py-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-primary text-3xl font-bold mr-2">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1 class="text-2xl font-bold">Still<span class="text-primary">Code</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#problemsPage" class="hover:text-primary transition-colors">Problems</a>
+                <a href="#featuresPage" class="hover:text-primary transition-colors">Features</a>
+                <a href="#communityPage" class="hover:text-primary transition-colors">Community</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-primary transition-colors">Sign In</a>
+                <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md transition-colors">Sign Up</a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="py-20 bg-dark">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Master Algorithms.</h1>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Create tasks.</h2>
+                <p class="text-xl mb-8 text-gray-300">Sharpen your coding skills with <span class="gradient-text font-bold">1500+</span> algorithmic challenges and prepare for technical interviews at top tech companies.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md text-center font-medium transition-colors">Start Coding Now</a>
+                    <a href="#" class="border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-md text-center font-medium transition-colors">Explore Problems</a>
+                </div>
+                <div class="mt-10 flex items-center space-x-8">
+                    <div class="stats-item">
+                        <p class="text-3xl font-bold text-primary">1500+</p>
+                        <p class="text-sm text-gray-400">Problems</p>
+                    </div>
+                    <div class="stats-item">
+                        <p class="text-3xl font-bold text-primary">500K+</p>
+                        <p class="text-sm text-gray-400">Users</p>
+                    </div>
+                    <div class="stats-item">
+                        <p class="text-3xl font-bold text-primary">15+</p>
+                        <p class="text-sm text-gray-400">Languages</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 md:pl-10">
+                <div class="code-window shadow-2xl">
+                    <div class="window-controls">
+                        <div class="control bg-red-500"></div>
+                        <div class="control bg-yellow-500"></div>
+                        <div class="control bg-green-500"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment">// Two Sum Problem</span>
+        <span class="keyword">function</span> <span class="function">twoSum</span>(nums, target) {
+            <span class="keyword">const</span> map = <span class="keyword">new</span> Map();
+            
+            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < nums.length; i++) {
+                <span class="keyword">const</span> complement = target - nums[i];
+                
+                <span class="keyword">if</span> (map.has(complement)) {
+                    <span class="keyword">return</span> [map.get(complement), i];
+                }
+        
+                map.set(nums[i], i);
+                }
+         
+    <span class="keyword">return</span> [];
+}
+
+<span class="comment">// Test case</span>
+<span class="keyword">const</span> result = twoSum([<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>], <span class="number">9</span>);
+console.log(result); <span class="comment">// [0, 1]</span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="problems" class="py-20 bg-darker">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-center">Popular Problems</h2>
+            <p class="text-gray-400 text-center mb-12">Start with these highly-rated algorithmic challenges</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="problem-card bg-dark rounded-lg p-6 border border-gray-800 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-primary font-bold">#1</span>
+                        <span class="bg-green-900 text-green-300 text-xs px-2 py-1 rounded">Easy</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Two Sum</h3>
+                    <p class="text-gray-400 mb-4">Find two numbers in an array that add up to a specific target.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-2">
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Array</span>
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Hash Table</span>
+                        </div>
+                        <span class="text-primary">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="problem-card bg-dark rounded-lg p-6 border border-gray-800 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-primary font-bold">#2</span>
+                        <span class="bg-yellow-900 text-yellow-300 text-xs px-2 py-1 rounded">Medium</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Add Two Numbers</h3>
+                    <p class="text-gray-400 mb-4">Add two numbers represented by linked lists.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-2">
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Linked List</span>
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Math</span>
+                        </div>
+                        <span class="text-primary">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="problem-card bg-dark rounded-lg p-6 border border-gray-800 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-primary font-bold">#3</span>
+                        <span class="bg-red-900 text-red-300 text-xs px-2 py-1 rounded">Hard</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Median of Two Sorted Arrays</h3>
+                    <p class="text-gray-400 mb-4">Find the median of two sorted arrays in O(log(m+n)) time.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-2">
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Array</span>
+                            <span class="bg-gray-800 text-xs px-2 py-1 rounded">Binary Search</span>
+                        </div>
+                        <span class="text-primary">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-md font-medium transition-colors">View All Problems</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-center">Why Choose StillCode?</h2>
+            <p class="text-gray-400 text-center mb-12">Features designed to accelerate your coding journey</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Interactive Coding Environment</h3>
+                    <p class="text-gray-400">Code directly in your browser with our powerful editor supporting 15+ programming languages.</p>
+                </div>
+                
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-lightbulb text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Detailed Solutions</h3>
+                    <p class="text-gray-400">Learn from comprehensive explanations and multiple approaches to solve each problem.</p>
+                </div>
+                
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Create or find community tasks</h3>
+                    <p class="text-gray-400">Create your own tasks or find tasks that someone already made</p>
+                </div>
+                
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Progress Tracking</h3>
+                    <p class="text-gray-400">Monitor your improvement with detailed statistics and personalized recommendations.</p>
+                </div>
+                
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Practice Mode</h3>
+                    <p class="text-gray-400">Simulate real interview conditions with timed challenges and focused problem sets.</p>
+                </div>
+                
+                <div class="feature-card bg-darker rounded-lg p-8 border border-gray-800 transition-all duration-300">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-trophy text-primary text-2xl feature-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Weekly Contests</h3>
+                    <p class="text-gray-400">Participate in weekly coding competitions and climb the global leaderboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="community" class="py-20 bg-darker">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-center">Join Our Community</h2>
+            <p class="text-gray-400 text-center mb-12">Connect with fellow coders and share your knowledge</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="community-card bg-dark rounded-lg p-8 border border-gray-800 text-center h-full">
+                    <div class="community-card-content">
+                        <div class="text-primary text-4xl mb-4">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Discussion Forums</h3>
+                        <p class="text-gray-400 mb-6">Engage in discussions about algorithms, problem-solving approaches, and coding best practices.</p>
+                    </div>
+                    <div class="community-card-footer">
+                        <a href="#" class="text-primary hover:underline">Join the conversation →</a>
+                    </div>
+                </div>
+                
+                <div class="community-card bg-dark rounded-lg p-8 border border-gray-800 text-center h-full">
+                    <div class="community-card-content">
+                        <div class="text-primary text-4xl mb-4">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Study Groups</h3>
+                        <p class="text-gray-400 mb-6">Form or join study groups focused on specific topics, languages, or interview preparation.</p>
+                    </div>
+                    <div class="community-card-footer">
+                        <a href="#" class="text-primary hover:underline">Find your group →</a>
+                    </div>
+                </div>
+                
+                <div class="community-card bg-dark rounded-lg p-8 border border-gray-800 text-center h-full">
+                    <div class="community-card-content">
+                        <div class="text-primary text-4xl mb-4">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Contribute</h3>
+                        <p class="text-gray-400 mb-6">Help improve our platform by contributing problems, solutions, or translations.</p>
+                    </div>
+                    <div class="community-card-footer">
+                        <a href="#" class="text-primary hover:underline">Learn how to contribute →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-dark">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Master Algorithms?</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Join 500,000+ developers who have improved their coding skills and landed their dream jobs.</p>
+            <a href="#" class="inline-block bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-md text-lg font-medium transition-colors">Start Coding Now</a>
+        </div>
+    </section>
+
+    <footer class="bg-dark py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary text-2xl font-bold mr-2">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Still<span class="text-primary">Code</span></h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Forge your path to coding excellence with our algorithmic challenges.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Problems</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Contests</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Practice</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Discussion</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Articles</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">About</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Our Team</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 StillCode. All rights reserved.</p>
+            </div>
+        </div>
+</html>
