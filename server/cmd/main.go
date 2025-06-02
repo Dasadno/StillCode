@@ -10,7 +10,7 @@ import (
 func main() {
 
 	r := gin.Default()
-	r.StaticFile("/", "App/UI/Landing/landingPage.html")
+	r.StaticFile("/", "../../client/src/assets/index.html")
 
 	db.InitDb()
 
