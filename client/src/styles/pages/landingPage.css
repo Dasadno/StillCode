@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+        }
+        
+        .code-window {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 6px;
+            padding: 10px;
+            background-color: #1a1a1a;
+        }
+        
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .code-content {
+            padding: 20px;
+            background-color: #121212;
+            color: #f8f8f8;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .keyword {
+            color: #ff3333;
+        }
+        
+        .string {
+            color: #ffcc00;
+        }
+        
+        .comment {
+            color: #6c757d;
+        }
+        
+        .function {
+            color: #00ccff;
+        }
+        
+        .number {
+            color: #ff9900;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #ff3333;
+            animation: blink 1s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #ff3333 }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #ff3333, #ff6666);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(255, 51, 51, 0.3);
+        }
+        
+        .stats-item {
+            position: relative;
+        }
+        
+        .stats-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 24px;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            border-color: #ff3333;
+        }
+        
+        .feature-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .community-card {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .community-card-content {
+            flex-grow: 1;
+        }
+        
+        .community-card-footer {
+            margin-top: auto;
+        }
