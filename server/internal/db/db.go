@@ -7,6 +7,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
+var DB *sql.DB
+
 func InitDb() {
 
 	dsn := "host=localhost user=postgres password=pass dbname=pgsql port=5432 sslmode=disable"
