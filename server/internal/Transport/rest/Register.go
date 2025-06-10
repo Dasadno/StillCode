@@ -2,6 +2,7 @@ package rest
 
 import (
 	"StillCode/server/internal/db"
+	"StillCode/server/internal/models"
 	_ "database/sql"
 	"net/http"
 
@@ -9,14 +10,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type RegisterInput struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required,min=6"`
-}
-
 func RegisterHandler(c *gin.Context) {
-	var input RegisterInput
+	var input models.RegisterInput
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
@@ -24,13 +19,13 @@ func RegisterHandler(c *gin.Context) {
 	}
 
 	var exists bool
-	err := db.DB.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)", input.Email).Scan(&exists)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "DB error"})
-		return
-	}
+	err := db.DB.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE email = $1 )", input.Email).Scan(&exists)
 	if exists {
 		c.JSON(http.StatusConflict, gin.H{"error": "User already exists"})
+		return
+	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "DB error"})
 		return
 	}
 

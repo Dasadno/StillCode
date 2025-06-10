@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
     <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ei9eG5QQSKHcwas-1rT-alqkQmo_yWRCpzYPGRH43XpeR9nH_gU5GhQLqj-Guo3dWG1h8odKQc-ZK0662wYxWSSHUsYuykDiVtmXh51GOOvsgllvLYzzlEkI2yZ5Vfg2L_K3iVhDYp_P-k6CdcC0YwfqYesAdA-Y9ph2M0-sbNZ-oghxsTlxjOsiK3E5DA4D0DmZwEZsOmOkVt-xM5h89A" charset="UTF-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/pages/SignIn.css">
     <script src="/css/base/TailWindcfg.js"></script>
@@ -17,20 +18,26 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
                 <div class="text-primary text-3xl font-bold mr-2">
-                    </div>
-                    <h1 class="text-2xl font-bold text-center">Still<span class="text-primary">Code</span></h1>
+                    <a href="/" class="fas fa-code"></a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="/signin" class="hover:text-primary transition-colors">Sign In</a>
-                    <a href="/signup" class="bg-primary hover:bg-primary-dark px-4 py-2 rounded-md transition-colors">Sign Up</a>
+                <h1 class="text-2xl font-bold">Still<span class="text-primary">Code</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="/problems" class="hover:text-primary transition-colors">Problems</a>
+                <a href="/features" class="hover:text-primary transition-colors">Features</a>
+                <a href="/communityPage" class="hover:text-primary transition-colors">Community</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="/signin" class="hover:text-primary transition-colors">Sign In</a>
+                <a href="/signup" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md transition-colors">Sign Up</a>
             </div>
             <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
-
 <div class="min-h-screen bg-dark flex items-center justify-center px-4">
-  <form class="bg-darker p-8 rounded-xl shadow-lg w-full max-w-sm font-sans">
+  <form id="SignInForm" class="bg-darker p-8 rounded-xl shadow-lg w-full max-w-sm font-sans">
     <h2 class="text-2xl font-bold text-light mb-6 text-center">Sign In</h2>
 
     <div class="mb-4">

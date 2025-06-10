@@ -1,6 +1,6 @@
   
-  
-  const form = document.getElementById('regForm');
+
+  const form = document.getElementById('registerForm');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -17,6 +17,11 @@
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-    alert(result.message || result.error);
+    let result = {};
+try {
+  result = await res.json();
+} catch {
+  console.error("server parse error");
+}
+alert(result.message || result.error || "unknown error from server");
   });
