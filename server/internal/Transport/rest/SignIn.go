@@ -25,7 +25,7 @@ func SignUpHandler(c *gin.Context) {
 	}
 	_, err = db.DB.Exec("SELECT EXISTS (SELECT 1 FROM users WHERE email = $1 and password = $2)", input.Email, input.Password)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "password incorrect"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "password incorrect"})
 		return
 	}
 

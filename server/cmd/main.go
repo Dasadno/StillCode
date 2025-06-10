@@ -20,6 +20,7 @@ func main() {
 	r.LoadHTMLGlob("../../server/templates/*.html")
 
 	r.POST("/register", rest.RegisterHandler)
+	r.GET("/signin", rest.SignUpHandler)
 
 	Transport.SetupWebRoutes(r)
 
