@@ -1,34 +1,40 @@
 package rest
 
 import (
+	"StillCode/server/internal/auth"
 	"StillCode/server/internal/db"
 	"StillCode/server/internal/models"
-	_ "database/sql"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
-func SignUpHandler(c *gin.Context) {
-	var input models.SignUpInput
-
-	var exists bool
-	err := db.DB.QueryRow("SELECT EXISTS (SELECT 1 FROM users WHERE email = $1)", input.Email).Scan(&exists)
-	if !exists {
-		c.JSON(http.StatusConflict, gin.H{"error": "User isn't exist"})
+func SignInHandler(c *gin.Context) {
+	var input models.SignInInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 
+	var user models.User
+	err := db.DB.QueryRow("SELECT id, password FROM users WHERE email=$1", input.Email).
+		Scan(&user.Id, &user.Password)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "DB error"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
-	_, err = db.DB.Exec("SELECT EXISTS (SELECT 1 FROM users WHERE email = $1 and password = $2)", input.Email, input.Password)
+
+	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)) != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	}
+
+	token, err := auth.GenerateJWT(user.Id)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "password incorrect"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Token error"})
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "Successfull"})
-
+	c.JSON(http.StatusOK, gin.H{"token": token})
 }

@@ -9,11 +9,13 @@ import (
 func SetupWebRoutes(r *gin.Engine) {
 
 	r.GET("/", LandingPage)
-
 	r.GET("/signin", SignInPage)
-
 	r.GET("/signup", SignUpPage)
+	r.GET("/profile", ProfilePage)
+}
 
+func ProfilePage(c *gin.Context) {
+	c.File("../../client/src/pages/profile.html")
 }
 
 func LandingPage(c *gin.Context) {

@@ -14,7 +14,7 @@ func main() {
 	r := gin.Default()
 
 	db.InitDb()
-
+	defer db.DB.Close()
 	r.Static("/js", "../../client/src/script")
 	r.Static("/css", "../../client/src/styles")
 	r.LoadHTMLGlob("../../server/templates/*.html")

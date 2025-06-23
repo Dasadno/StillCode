@@ -11,6 +11,15 @@
     <script src="..\styles\base\TailWindcfg.js"></script>
   
 </head>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('token')) {
+    document.getElementById('authButtons').style.display = 'none';
+    document.getElementById('profileIcon').style.display = 'block';
+  }
+});
+</script>
 <body class="text-light">
     <header class="bg-darker py-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 flex justify-between items-center">
@@ -26,14 +35,26 @@
                 <a href="#communityPage" class="hover:text-primary transition-colors">Community</a>
             </nav>
             <div class="flex items-center space-x-4">
+                <div id="authButtons">
                 <a href="/signin" class="hover:text-primary transition-colors">Sign In</a>
                 <a href="/signup" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md transition-colors">Sign Up</a>
+            </div>
+            <img id="profileIcon" src="/img/user.svg" style="display:none" onclick="window.location='/profile'" />
             </div>
             <button class="md:hidden text-2xl">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
+
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('token')) {
+      document.getElementById('authButtons').style.display = 'none';
+      document.getElementById('profileIcon').style.display = 'block';
+    }
+  });
+</script>
 
     <section class="py-20 bg-dark">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">

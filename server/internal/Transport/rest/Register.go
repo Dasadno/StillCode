@@ -4,6 +4,7 @@ import (
 	"StillCode/server/internal/db"
 	"StillCode/server/internal/models"
 	_ "database/sql"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,11 +20,7 @@ func RegisterHandler(c *gin.Context) {
 	}
 
 	var exists bool
-	err := db.DB.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)", input.Email).Scan(&exists)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "DB error (check exists)"})
-		return
-	}
+	db.DB.QueryRow("SELECT EXISTS(SELECT 1 FROM public.users WHERE email = $1)", input.Email).Scan(&exists)
 	if exists {
 		c.JSON(http.StatusConflict, gin.H{"error": "User already exists"})
 		return
@@ -38,7 +35,11 @@ func RegisterHandler(c *gin.Context) {
 	_, err = db.DB.Exec(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`,
 		input.Name, input.Email, string(hashedPassword))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "DB insert failed"})
+		log.Printf("RegisterHandler: insert error: %s\n", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":  "DB insert failed",
+			"detail": err.Error(),
+		})
 		return
 	}
 

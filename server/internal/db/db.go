@@ -10,15 +10,14 @@ import (
 var DB *sql.DB
 
 func InitDb() {
-
+	var err error
 	dsn := "host=localhost user=postgres password=pass dbname=pgsql port=5432 sslmode=disable"
-	db, err := sql.Open("postgres", dsn)
+	DB, err = sql.Open("postgres", dsn)
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
 
-	err = db.Ping()
+	err = DB.Ping()
 	if err != nil {
 		panic(err)
 	}

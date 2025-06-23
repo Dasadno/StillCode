@@ -1,19 +1,20 @@
-document.getElementById('login-btn').addEventListener('click', () => {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  fetch('/api/login', {
+document.getElementById('signInForm').addEventListener('signin', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    email: form.email.value,
+    password: form.password.value
+  };
+  const res = await fetch('/signin', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      updateUIAfterLogin();
-    } else {
-      alert('Login failed');
-    }
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(data)
   });
+  const json = await res.json();
+  if (res.ok) {
+    localStorage.setItem('token', json.token);
+    window.location.href = '/profile.html';
+  } else {
+    alert(json.error);
+  }
 });
