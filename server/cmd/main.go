@@ -19,9 +19,7 @@ func main() {
 	r.Static("/css", "../../client/src/styles")
 	r.LoadHTMLGlob("../../server/templates/*.html")
 
-	r.POST("/register", rest.RegisterHandler)
-	r.GET("/signin", rest.SignUpHandler)
-
+	rest.SetupHandlers(r)
 	Transport.SetupWebRoutes(r)
 
 	r.Run(":8080")
