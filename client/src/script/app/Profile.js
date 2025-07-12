@@ -20,4 +20,12 @@
   document.getElementById('userEmail').textContent = user.email;
   document.getElementById('userRating').textContent = user.rating;
   document.getElementById('userTasksSolved').textContent = user.tasksSolved;
+
+ 
+  const logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');
+
+    window.location.href = '/';
+  });
 })();
