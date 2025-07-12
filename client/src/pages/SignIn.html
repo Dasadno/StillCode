@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/pages/SignIn.css">
     <script src="/css/base/TailWindcfg.js"></script>
-
+    
 </head>
 
 <body class="text-light bg-dark font-sans">
@@ -40,38 +40,44 @@
 
     <div class="min-h-screen flex items-center justify-center px-4">
     <form id="SignInForm" class="bg-darker p-8 rounded-xl shadow-lg w-full max-w-sm font-sans">
-      <h2 class="text-2xl font-bold text-light mb-6 text-center">Sign Up</h2>
-
+      <h2 class="text-2xl font-bold text-light mb-6 text-center">Sign In</h2>
 
       <div class="mb-4">
-        <label class="block text-light mb-2" for="regEmail">Email</label>
+        <label class="block text-light mb-2" for="email">Email</label>
         <input
-          type="email"
+          name="email"
           id="email"
+          type="email"
           placeholder="Enter email"
-          class="w-full px-4 py-2 rounded-md bg-dark text-light placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-          required />
+          class="w-full px-4 py-2 rounded-md bg-dark text-light"
+          required
+        />
       </div>
 
       <div class="mb-6">
-        <label class="block text-light mb-2" for="regPassword">Password</label>
+        <label class="block text-light mb-2" for="password">Password</label>
         <input
+          name="password"
+          id="password"
           type="password"
-          id="Password"
           placeholder="Enter password"
-          class="w-full px-4 py-2 rounded-md bg-dark text-light placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-          required />
+          class="w-full px-4 py-2 rounded-md bg-dark text-light"
+          required
+        />
       </div>
 
       <button
-        type="signin"
-        class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300"
+        type="submit"
+        class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-md"
       >
         Sign In
       </button>
     </form>
-    
+    <script src="/js/app/SignIn.js"></script>
   </div>
+
+
+
 
   <footer class="bg-dark py-12">
         <div class="container mx-auto px-4">

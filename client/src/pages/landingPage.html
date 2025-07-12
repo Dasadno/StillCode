@@ -25,10 +25,11 @@
                 <a href="/features" class="hover:text-primary transition-colors">Features</a>
                 <a href="/communityPage" class="hover:text-primary transition-colors">Community</a>
             </nav>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4" id="authButtons">
                 <a href="/signin" class="hover:text-primary transition-colors">Sign In</a>
                 <a href="/signup" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md transition-colors">Sign Up</a>
             </div>
+                <img id="profileIcon" src="/img/user.svg" style="display:none" onclick="window.location='/profile'" />
             <button class="md:hidden text-2xl">
                 <a href="/" class="fas fa-code"></a>
             </button>
