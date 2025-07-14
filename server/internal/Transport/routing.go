@@ -12,6 +12,7 @@ func SetupWebRoutes(r *gin.Engine) {
 	r.GET("/signin", SignInPage)
 	r.GET("/signup", SignUpPage)
 	r.GET("/profile", ProfilePage)
+	r.GET("/problems", TasksPage)
 }
 
 func ProfilePage(c *gin.Context) {
@@ -28,4 +29,8 @@ func SignInPage(c *gin.Context) {
 
 func SignUpPage(c *gin.Context) {
 	c.File("../../client/src/pages/SignUp.html")
+}
+
+func TasksPage(c *gin.Context) {
+	c.File("../../client/src/pages/Tasks.html")
 }

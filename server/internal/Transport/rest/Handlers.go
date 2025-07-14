@@ -11,6 +11,7 @@ func SetupHandlers(r *gin.Engine) {
 
 	r.POST("/signup", RegisterHandler)
 	r.POST("/signin", SignInHandler)
+	r.GET("/api/tasks", GetTasksHandler)
 
 	protected := r.Group("/api")
 	protected.Use(auth.AuthRequired())
