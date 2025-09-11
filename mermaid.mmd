@@ -1,0 +1,81 @@
+flowchart TD
+    A[project root] --> B[client]
+    A --> C[server]
+
+    %% client
+    B --> B1[src]
+    B1 --> B2[assets]
+    B1 --> B3[pages]
+    B1 --> B4[script/app]
+    B1 --> B5[styles]
+
+    B2 --> B2a[index.html]
+
+    B3 --> B3a[landingPage.html]
+    B3 --> B3b[Profile.html]
+    B3 --> B3c[settingsPage.html]
+    B3 --> B3d[SignIn.html]
+    B3 --> B3e[SignUp.html]
+    B3 --> B3f[Tasks.html]
+    B3 --> B3g[TaskSolving.html]
+
+    B4 --> B4a[LandingP.js]
+    B4 --> B4b[Profile.js]
+    B4 --> B4c[SettingsP.js]
+    B4 --> B4d[SignIn.js]
+    B4 --> B4e[SignUp.js]
+    B4 --> B4f[Tasks.js]
+    B4 --> B4g[TaskSolving.js]
+
+    B5 --> B5a[base]
+    B5a --> B5a1[TailWindcfg.js]
+
+    B5 --> B5b[components]
+    B5b --> B5b1[img/user.svg]
+
+    B5 --> B5c[pages]
+    B5c --> B5c1[landingPage.css]
+    B5c --> B5c2[settingsPage.css]
+    B5c --> B5c3[SignIn.css]
+    B5c --> B5c4[SignUp.css]
+    B5c --> B5c5[TaskSolving.css]
+    B5c --> B5c6[tasksPage.css]
+
+    %% server
+    C --> C1[cmd]
+    C1 --> C1a[main.go]
+
+    C --> C2[docs]
+    C2 --> C2a[Docs.md]
+
+    C --> C3[internal]
+    C3 --> C3a[auth]
+    C3a --> C3a1[jwt.go]
+    C3a --> C3a2[middleware.go]
+
+    C3 --> C3b[db]
+    C3b --> C3b1[db.go]
+    C3b --> C3b2[seed_tasks.sql]
+
+    C3 --> C3c[models]
+    C3c --> C3c1[SignIn.go]
+    C3c --> C3c2[SignUp.go]
+    C3c --> C3c3[Tasks.go]
+    C3c --> C3c4[users.go]
+
+    C3 --> C3d[services]
+    C3d --> C3d1[bruh.md]
+
+    C3 --> C3e[Transport]
+    C3e --> C3e1[routing.go]
+    C3e --> C3e2[rest]
+    C3e2 --> C3e2a[Handlers.go]
+    C3e2 --> C3e2b[Profile.go]
+    C3e2 --> C3e2c[Register.go]
+    C3e2 --> C3e2d[SignIn.go]
+    C3e2 --> C3e2e[Tasks.go]
+
+    C --> C4[templates]
+    C4 --> C4a[landingPage.html]
+    C4 --> C4b[SignIn.html]
+    C4 --> C4c[SignUp.html]
