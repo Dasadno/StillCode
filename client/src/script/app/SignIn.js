@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('token', result.token);
       window.location.href = '/';    
+    
     } catch (err) {
       console.error('Fetch error:', err);
       alert('Network error');
