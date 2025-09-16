@@ -1,46 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('token');
-  const authButtons = document.getElementById('authButtons');
-  const profileIcon  = document.getElementById('profileIcon');
+const form = document.getElementById('registerForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
 
-  if (token) {
-    authButtons.classList.add('hidden');
-    profileIcon.classList.remove('hidden');
-  } else {
-    authButtons.classList.remove('hidden');
-    profileIcon.classList.add('hidden');
-  }
-});
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+    };
 
-
-const form = document.getElementById('signInForm');
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-
-  const data = {
-    email:    form.email.value.trim(),
-    password: form.password.value.trim(),
-  };
-
-  try {
-    const res = await fetch('/signin', {
+    const res = await fetch('/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
-    const result = await res.json();
-
-    if (!res.ok) {
-      alert(result.error || 'Sign‑in failed');
-      return;
-    }
-
- 
-    localStorage.setItem('token', result.token);
-    window.location.href = '/';
-  } catch (err) {
-    console.error('Fetch error:', err);
-    alert('Network error');
-  }
-});
+    let result = {};
+try {
+  result = await res.json();
+} catch {
+  console.error("server parse error");
+}
+alert(result.message || result.error || "unknown error from server");
+  });
