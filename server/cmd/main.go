@@ -21,7 +21,12 @@ func main() {
 
 	rest.SetupHandlers(r)
 	Transport.SetupWebRoutes(r)
+	CertificatePath := "C:\\Users\\1\\sc\\certificate.crt"
+	KeyPath := "C:\\Users\\1\\sc\\private.key"
 
-	r.Run(":8080")
+	err := r.RunTLS(":8080", CertificatePath, KeyPath)
+	if err != nil {
+		panic("Failed to start server: " + err.Error())
+	}
 
 }
