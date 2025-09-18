@@ -14,6 +14,10 @@ func SetupWebRoutes(r *gin.Engine) {
 	r.GET("/profile", ProfilePage)
 	r.GET("/problems", TasksPage)
 	r.GET("/task/:id", TaskSolvingPage)
+
+	r.NoRoute(func(c *gin.Context) {
+		c.File("../../client/src/assets/404.html") // page 404
+	})
 }
 
 func ProfilePage(c *gin.Context) {
