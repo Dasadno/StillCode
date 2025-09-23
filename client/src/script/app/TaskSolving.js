@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const pathParts = window.location.pathname.split('/');
-  taskId = pathParts[pathParts.length - 1]; 
-});
+  const taskId = pathParts[pathParts.length - 1]; 
 
   if (!taskId) {
     alert('No task ID found in URL');
@@ -9,10 +8,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const setText = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = value ?? '';
-        else console.warn(`Element with id="${id}" not found`);
-      };
+    const el = document.getElementById(id);
+    if (el) el.textContent = value ?? '';
+    else console.warn(`Element with id="${id}" not found`);
+  };
 
   try {
     const res = await fetch(`/api/task/${taskId}`);
@@ -24,15 +23,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     setText('taskDescription', task.description); 
 
     const lang = '71';
-    document.getElementById('codeEditor').value = task.templates[lang] || '';
+    const editor = document.getElementById('codeEditor');
+    if (editor) editor.value = task.templates?.[lang] || '';
 
     const testBlock = document.getElementById('testCases');
-    testBlock.innerHTML = '';
-    task.testCases.forEach(tc => {
-      testBlock.innerHTML += `input: ${tc.input} → output: ${tc.expected}<br/>`;
-    });
+    if (testBlock) {
+      testBlock.innerHTML = '';
+      task.testCases.forEach(tc => {
+        testBlock.innerHTML += `input: ${tc.input} → output: ${tc.expected}<br/>`;
+      });
+    }
   } catch (err) {
     console.error(err);
     alert('Ошибка при загрузке задачи');
   }
-;
+});

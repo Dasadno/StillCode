@@ -8,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/css/base/TailWindcfg.js"></script>
   <link rel="stylesheet" href="/css/pages/tasksPage.css" />
+  <script src="/js/app/TaskSolving.js" defer></script>
   <script src="/js/app/base/ProfileWidget.js" defer></script>
   <script src="/js/app/base/tokenRoutes.js" defer></script>
 
@@ -15,7 +16,7 @@
 <body class="bg-dark text-light min-h-screen font-sans flex flex-col">
 
 
-  <header class="bg-darker py-3 shadow-lg flex items-center justify-between px-6">
+  <header class="bg-dark py-3 shadow-lg flex items-center justify-between px-6">
     
         
         
@@ -43,8 +44,14 @@
   <main class="flex flex-1 overflow-hidden">
    
     <aside class="w-1/4 bg-primary-darker p-6 overflow-auto">
-      <h1 id="taskTitle" class="text-2xl font-bold mb-4"></h1>
-      <div id="taskDescription" class="text-sm whitespace-pre-line"></div>
+      <h1 id="taskTitle" class="text-2xl font-bold mb-4 border-b border-gray-600"></h1>
+      <div id="taskDescription" class="text-sm whitespace-pre-line border-b border-gray-600"></div>
+      <button id="submitBtn"
+              class="absolute mt-8 ml-48 text-white px-6 py-5 rounded-md shadow-lg transition-colors h-[44px]
+              text-align-center flex items-center justify-center bg-secondary-dark hover:bg-secondary-darker focus:outline-none 
+             ">
+        Submit
+      </button>
     </aside>
 
 
@@ -60,28 +67,25 @@
       <textarea id="codeEditor"
                 class="flex-1 bg-primary-darker text-light
                  p-4 rounded-b-lg font-mono resize-none h-full
-                   border-b border-r border-l border-gray-700 "> >
+                   border-b border-r border-l border-gray-700 
+                   font-size-12"> >
      </textarea>
     
    
       <div id="testCases"
       
            class=" bg-primary-darker p-4 rounded-md h-32 overflow-auto 
-           text-sm text-gray-400 border border-gray-600 mt-3 mb-1\">
-                    
+           text-sm text-gray-400 border border-gray-600 mt-3 mb-1\
+           font-mono">
+                  
       </div>
 
-      <button id="submitBtn"
-              class="absolute bottom-[127px] right-[1180px] top-[600px] text-white px-6 py-5 rounded-md shadow-lg transition-colors h-[44px]
-              text-align-center flex items-center justify-center bg-secondary-dark hover:bg-secondary-darker focus:outline-none 
-             ">
-        Submit
-      </button>
+      
       
     </section>
   </main>
 
-  <script src="/js/app/TaskSolving.js"></script>
+  
 
   <footer class="bg-primary-darker"> 
     <div class="container mx-auto px-4 py-6 text-center text-gray-400">
