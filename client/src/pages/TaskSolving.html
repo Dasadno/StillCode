@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/css/base/TailWindcfg.js"></script>
+  <link rel="stylesheet" href="/css/pages/tasksPage.css" />
   <script src="/js/app/base/ProfileWidget.js" defer></script>
   <script src="/js/app/base/tokenRoutes.js" defer></script>
 
@@ -48,13 +49,26 @@
 
 
     <section class="flex-1 relative p-6 flex flex-col">
- 
+      <div class="bg-primary-darker border
+       border-gray-600 rounded-t-lg overflow-hidden">
+                    <div class="window-controls">
+                        <div class="control bg-red-500"></div>
+                        <div class="control bg-yellow-500"></div>
+                        <div class="control bg-green-500"></div>
+                    </div>
+     </div>
       <textarea id="codeEditor"
-                class="flex-1 bg-primary-darker text-light p-4 rounded-lg font-mono resize-none h-full border border-gray-700"></textarea>
-
+                class="flex-1 bg-primary-darker text-light
+                 p-4 rounded-b-lg font-mono resize-none h-full
+                   border-b border-r border-l border-gray-700 "> >
+     </textarea>
+    
    
       <div id="testCases"
-           class=" bg-primary-darker p-4 rounded-md h-32 overflow-auto text-sm text-gray-400 border border-gray-600 mt-3 mb-1">
+      
+           class=" bg-primary-darker p-4 rounded-md h-32 overflow-auto 
+           text-sm text-gray-400 border border-gray-600 mt-3 mb-1\">
+                    
       </div>
 
       <button id="submitBtn"
