@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const res = await fetch(`/api/task/${taskId}`);
+    console.log(res);
+    console.log('taskId:', taskId);
     if (!res.ok) throw new Error('Failed to load task');
 
     const task = await res.json();
