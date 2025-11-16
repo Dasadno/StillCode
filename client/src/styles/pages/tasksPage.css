@@ -10,3 +10,10 @@
             height: 12px;
             border-radius: 50%;
         }
+@media (max-width: 1024px) {
+    #taskSide {
+        width: 100% !important;
+        border-right: none;
+        border-bottom: 1px solid #444;
+    }
+}

@@ -1,6 +1,7 @@
  tailwind.config = {
             theme: {
                 extend: {
+                    
                     keyfreames: {
                         gradient: {
                             '0%, 100%': { 'background-position': '0% 50%' },
