@@ -1,0 +1,105 @@
+/**
+ * Main Stylesheet - Global styles for StillCode
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==================== BASE STYLES ==================== */
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a;
+}
+
+/* ==================== CODE EDITOR ==================== */
+
+.code-window {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background-color: #1a1a1a;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.code-content {
+  padding: 20px;
+  background-color: #121212;
+  color: #f8f8f8;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+/* Code syntax highlighting */
+.keyword { color: #ff3333; }
+.string { color: #ffcc00; }
+.comment { color: #6c757d; }
+.function { color: #00ccff; }
+.number { color: #ff9900; }
+
+/* ==================== ANIMATIONS ==================== */
+
+.typing-animation {
+  border-right: 2px solid #ff3333;
+  animation: blink 1s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #ff3333 }
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ff3333, #ff6666);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==================== SCROLLBAR ==================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ==================== LOADING SPINNER ==================== */
+
+.spinner {
+  border: 2px solid rgba(255, 51, 51, 0.3);
+  border-top-color: #ff3333;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

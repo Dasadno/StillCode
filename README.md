@@ -1,64 +1,163 @@
-StillCode
+# StillCode
 
-### Общая задумка
+A LeetCode-like competitive programming platform with real-time code execution in a sandboxed environment.
 
-Аналог leetCode, с плюшками от себя. 
+## Quick Start
 
----
+### Prerequisites
 
-## Содержание 
+- Docker & Docker Compose
+- Go 1.23+
 
-1. Функционал к реализации 
-2. Описание реализованного функционала
-3. Использованные технологии
-4. Информация для участников проекта 
+### 1. Start Database
 
-## Функционал проекта 
-- [x] Работающая система регистрации / входа в существующий аккаунт
-- [ ] Встроенный компилятор 
-- [ ] Возможность пользователя работать на нескольких языках программирования
-- [ ] Создание списка задач, с фильтрами
+```bash
+docker compose up -d
+```
 
- Реализованный функционал 
+This starts PostgreSQL with:
+- Database: `stillcode`
+- User: `stillcode_user`
+- Password: `stillcode_secret_password`
+- Port: `5432`
 
-- [x] Система регистрации/входа в аккаунт
-- [x] Отслеживание, создание сессии с помощью jwt токена
-- [x] Возможность добавления пользователя/задач в базу данных
+The database is automatically initialized with schema and seeded with 35 algorithmic tasks.
 
+### 2. Pull Code Execution Images
 
----
+```bash
+docker pull python:3.11-slim
+docker pull gcc:12
+docker pull openjdk:20-slim
+docker pull node:20-slim
+docker pull golang:1.23-alpine
+```
 
-## Использованные технологий
+### 3. Run the Server
 
-#### Backend
-- Go  - выбран по причине хорошей оптимизации программ,
-  также в следствии того, что язык изначально создавался для взаимодействия с сайтами, в нем есть множество библиотек способных помочь разработке и сделать ее более удобной.
+```bash
+cd StillCode
+go run server/cmd/main.go
+```
 
+Server starts at `http://localhost:8080`
 
-#### Frontend  
-- JavaScript - Один из самых распростроненных и удобных языков для разработки фронтэнда. Выбран, как самый привлекающий вариант для разработки
+### 4. Open the App
 
----
-#### DB
+Navigate to `http://localhost:8080` in your browser.
 
-- PostgreSql - Одна из самых распростроненных БД, в силу своего удобства. Будет использоваться как хранилище задач (Возможно что-то еще).
+## Features
 
+- **User Authentication**: JWT-based registration and login
+- **35 Algorithmic Tasks**: Arrays, Strings, DP, Trees, Graphs, and more
+- **5 Languages**: Python, C++, Java, JavaScript, Go
+- **Real-time Code Execution**: Docker-sandboxed runner
+- **Progress Tracking**: User statistics and submissions
 
- #### Фреймворки
+## Tech Stack
 
- - TailWind CSS - Фреймворк упрощающий написание стилей
+| Layer | Technology |
+|-------|------------|
+| Backend | Go 1.23 + Gin |
+| Database | PostgreSQL 15 |
+| Frontend | Vanilla JS + TailwindCSS |
+| Editor | CodeMirror 5 |
+| Runner | Docker containers |
 
- #### Среды программирования
+## API Endpoints
 
- - Visual Studio Code - поскольку в нем поддерживается все, что нам нужно и он достаточно удобен.
+All endpoints are **lowercase**.
 
-   ---
+### Public
 
-### Source
-[Golang](https://go.dev/doc/)
-[TailWindCSS](https://tailwindcss.com/docs/installation/using-vite)
-[Gin](https://github.com/gin-gonic/gin)
-[Docker](https://docs.docker.com/)
-[PostgreSQL](https://www.postgresql.org/docs/)
-[Golang CodeStyle](https://google.github.io/styleguide/go/)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Landing page |
+| GET | `/signin` | Sign in page |
+| GET | `/signup` | Sign up page |
+| GET | `/problems` | Problems list |
+| GET | `/task/:id` | Problem solving page |
+| POST | `/api/auth/signup` | Register user |
+| POST | `/api/auth/signin` | Login (returns JWT) |
+| GET | `/api/tasks` | List tasks |
+| GET | `/api/tasks/:id` | Get task with test cases |
 
+### Protected (require JWT)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/profile` | User profile |
+| POST | `/api/run` | Run code |
+| POST | `/api/submit/:id` | Submit solution |
+
+### Query Parameters for `/api/tasks`
+
+- `search` - Search by title
+- `difficulty` - Filter: easy, medium, hard
+- `community` - Filter: true/false
+- `page` - Page number
+- `pageSize` - Items per page
+
+## Project Structure
+
+```
+StillCode/
+├── client/
+│   └── src/
+│       ├── pages/          # HTML pages
+│       ├── scripts/        # JavaScript modules
+│       ├── services/       # API, auth, storage
+│       ├── components/     # Reusable components
+│       └── styles/         # CSS
+├── server/
+│   ├── cmd/
+│   │   └── main.go         # Entry point
+│   └── internal/
+│       ├── auth/           # JWT
+│       ├── db/             # Database
+│       ├── models/         # Data models
+│       ├── services/       # Business logic
+│       ├── handlers/       # HTTP handlers
+│       ├── middleware/     # CORS, rate limit
+│       ├── router/         # Routes
+│       └── runner/         # Docker sandbox
+├── db/
+│   ├── init.sql            # Schema
+│   └── seed.sql            # 35 tasks
+├── docker-compose.yml
+└── README.md
+```
+
+## Code Execution
+
+Each submission runs in an isolated Docker container:
+
+- **Memory**: 128MB limit
+- **CPU**: 0.5 cores
+- **Timeout**: 5 seconds
+- **Network**: Disabled
+- **Filesystem**: Read-only + 64MB tmpfs
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DB_HOST` | localhost | Database host |
+| `DB_PORT` | 5433 | Database port (Docker) |
+| `DB_USER` | stillcode_user | Database user |
+| `DB_PASSWORD` | stillcode_secret_password | Database password |
+| `DB_NAME` | stillcode | Database name |
+| `PORT` | 8080 | Server port |
+| `CORS_ORIGIN` | * | CORS allowed origin |
+
+## Security
+
+- Password hashing with bcrypt
+- JWT tokens (30 min expiration)
+- Rate limiting (10 req/min for code execution)
+- Docker isolation with resource limits
+- Input size validation
+
+## License
+
+MIT

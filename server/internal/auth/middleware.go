@@ -1,7 +1,6 @@
 package auth
 
 import (
-	_ "StillCode/server/internal/db"
 	"net/http"
 	"strings"
 

@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: stillcode-postgres
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      POSTGRES_DB: stillcode
+      POSTGRES_USER: stillcode_user
+      POSTGRES_PASSWORD: stillcode_secret_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stillcode_user -d stillcode"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:
+    driver: local

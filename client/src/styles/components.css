@@ -1,0 +1,166 @@
+/**
+ * Components Stylesheet - Reusable component styles
+ */
+
+/* ==================== CARDS ==================== */
+
+/* Problem/Feature cards */
+.problem-card:hover,
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(255, 51, 51, 0.3);
+}
+
+.feature-card:hover {
+  border-color: #ff3333;
+}
+
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+/* Task list cards */
+.task-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
+}
+
+/* Community cards */
+.community-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.community-card-content {
+  flex-grow: 1;
+}
+
+.community-card-footer {
+  margin-top: auto;
+}
+
+/* ==================== BADGES ==================== */
+
+.badge-easy {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.badge-medium {
+  background-color: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+}
+
+.badge-hard {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* ==================== TEST RESULTS ==================== */
+
+.test-passed {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-left: 3px solid #22c55e;
+}
+
+.test-failed {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-left: 3px solid #ef4444;
+}
+
+.test-timeout {
+  background-color: rgba(234, 179, 8, 0.1);
+  border-left: 3px solid #eab308;
+}
+
+/* ==================== PAGINATION ==================== */
+
+.pagination-btn {
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #ff3333;
+  color: white;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-active {
+  background-color: #ff3333;
+  color: white;
+}
+
+/* ==================== STATS ==================== */
+
+.stats-item {
+  position: relative;
+}
+
+.stats-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== CODE EDITOR ==================== */
+
+#codeEditor {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  tab-size: 4;
+}
+
+#codeEditor:focus {
+  outline: none;
+  border-color: #ff3333;
+}
+
+/* Output area */
+#outputArea {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Language dropdown */
+#langDropdown {
+  z-index: 100;
+  min-width: 120px;
+  top: 100%;
+}
+
+#langDropdown li {
+  white-space: nowrap;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 1024px) {
+  #taskSide {
+    width: 100% !important;
+    border-right: none;
+    border-bottom: 1px solid #444;
+  }
+
+  main.flex {
+    flex-direction: column;
+  }
+}

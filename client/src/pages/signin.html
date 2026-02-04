@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | StillCode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="/src/styles/components.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#ff3333',
+            'primary-dark': '#cc0000',
+            'primary-darker': '#221f1fff',
+            'secondary-dark': '#333030ff',
+            'secondary-darker': '#2b2727ff',
+            'dark': '#131212ff',
+            'darker': '#0a0a0a',
+            'light': '#f8f8f8',
+          },
+          fontFamily: {
+            'code': ['Consolas', 'Monaco', 'Courier New', 'monospace'],
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="text-light bg-dark font-sans">
+
+  <header class="bg-darker py-4 sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="text-primary text-3xl font-bold mr-2">
+          <i class="fas fa-code"></i>
+        </div>
+        <a href="/"><h1 class="text-2xl font-bold">Still<span class="text-primary">Code</span></h1></a>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="/problems" id="problemsButton" class="hover:text-primary transition-colors">Problems</a>
+        <a href="/features" id="featuresButton" class="hover:text-primary transition-colors">Features</a>
+        <a href="/community" id="communityButton" class="hover:text-primary transition-colors">Community</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="/signin" class="hover:text-primary transition-colors">Sign In</a>
+        <a href="/signup" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md transition-colors">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <form id="signInForm" method="post" action="#" class="bg-darker p-8 rounded-xl shadow-lg w-full max-w-sm font-sans">
+      <h2 class="text-2xl font-bold text-light mb-6 text-center">Sign In</h2>
+
+      <div class="mb-4">
+        <label class="block text-light mb-2" for="email">Email</label>
+        <input
+          name="email"
+          id="email"
+          type="email"
+          placeholder="Enter email"
+          class="w-full px-4 py-2 rounded-md bg-dark text-light placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+          required
+        />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-light mb-2" for="password">Password</label>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="Enter password"
+          class="w-full px-4 py-2 rounded-md bg-dark text-light placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-md transition-colors">
+        Sign In
+      </button>
+
+      <p class="text-center text-gray-400 mt-4">
+        Don't have an account? <a href="/signup" class="text-primary hover:underline">Sign Up</a>
+      </p>
+    </form>
+  </div>
+
+  <footer class="bg-dark py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <div class="text-primary text-2xl font-bold mr-2"><i class="fas fa-code"></i></div>
+            <h3 class="text-xl font-bold">Still<span class="text-primary">Code</span></h3>
+          </div>
+          <p class="text-gray-400 mb-4">Forge your path to coding excellence with our algorithmic challenges.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2">
+            <li><a href="/problems" class="text-gray-400 hover:text-primary transition-colors">Problems</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Contests</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Practice</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Discussion</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Articles</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">About</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Our Team</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Press</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Help Center</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">FAQs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 StillCode. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/scripts/signin.js"></script>
+</body>
+</html>
