@@ -60,8 +60,6 @@ Navigate to `http://localhost:8080` in your browser.
 
 ## API Endpoints
 
-All endpoints are **lowercase**.
-
 ### Public
 
 | Method | Endpoint | Description |
@@ -127,7 +125,7 @@ StillCode/
 Each submission runs in an isolated Docker container:
 
 - **Memory**: 128MB limit
-- **CPU**: 0.5 cores
+- **CPU**: 1 core
 - **Timeout**: 5 seconds
 - **Network**: Disabled
 - **Filesystem**: Read-only + 64MB tmpfs
