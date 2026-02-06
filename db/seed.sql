@@ -12,8 +12,8 @@ VALUES (
     E'def twoSum(nums, target):\n    # Your code here\n    pass',
     E'function twoSum(nums, target) {\n    // Your code here\n}',
     E'func twoSum(nums []int, target int) []int {\n    // Your code here\n    return nil\n}',
-    E'vector<int> twoSum(vector<int>& nums, int target) {\n    // Your code here\n    return {};\n}',
-    E'public int[] twoSum(int[] nums, int target) {\n    // Your code here\n    return new int[]{};\n}'
+    E'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        // Your code here\n        return {};\n    }\n};',
+    E'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Your code here\n        return new int[]{};\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -34,8 +34,8 @@ VALUES (
     E'def isPalindrome(s):\n    # Your code here\n    pass',
     E'function isPalindrome(s) {\n    // Your code here\n}',
     E'func isPalindrome(s string) bool {\n    // Your code here\n    return false\n}',
-    E'bool isPalindrome(string s) {\n    // Your code here\n    return false;\n}',
-    E'public boolean isPalindrome(String s) {\n    // Your code here\n    return false;\n}'
+    E'class Solution {\npublic:\n    bool isPalindrome(string s) {\n        // Your code here\n        return false;\n    }\n};',
+    E'class Solution {\n    public boolean isPalindrome(String s) {\n        // Your code here\n        return false;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -55,8 +55,8 @@ VALUES (
     E'def maxSubArray(nums):\n    # Your code here\n    pass',
     E'function maxSubArray(nums) {\n    // Your code here\n}',
     E'func maxSubArray(nums []int) int {\n    // Your code here\n    return 0\n}',
-    E'int maxSubArray(vector<int>& nums) {\n    // Your code here\n    return 0;\n}',
-    E'public int maxSubArray(int[] nums) {\n    // Your code here\n    return 0;\n}'
+    E'class Solution {\npublic:\n    int maxSubArray(vector<int>& nums) {\n        // Your code here\n        return 0;\n    }\n};',
+    E'class Solution {\n    public int maxSubArray(int[] nums) {\n        // Your code here\n        return 0;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -77,8 +77,8 @@ VALUES (
     E'def climbStairs(n):\n    # Your code here\n    pass',
     E'function climbStairs(n) {\n    // Your code here\n}',
     E'func climbStairs(n int) int {\n    // Your code here\n    return 0\n}',
-    E'int climbStairs(int n) {\n    // Your code here\n    return 0;\n}',
-    E'public int climbStairs(int n) {\n    // Your code here\n    return 0;\n}'
+    E'class Solution {\npublic:\n    int climbStairs(int n) {\n        // Your code here\n        return 0;\n    }\n};',
+    E'class Solution {\n    public int climbStairs(int n) {\n        // Your code here\n        return 0;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -99,8 +99,8 @@ VALUES (
     E'def isValid(s):\n    # Your code here\n    pass',
     E'function isValid(s) {\n    // Your code here\n}',
     E'func isValid(s string) bool {\n    // Your code here\n    return false\n}',
-    E'bool isValid(string s) {\n    // Your code here\n    return false;\n}',
-    E'public boolean isValid(String s) {\n    // Your code here\n    return false;\n}'
+    E'class Solution {\npublic:\n    bool isValid(string s) {\n        // Your code here\n        return false;\n    }\n};',
+    E'class Solution {\n    public boolean isValid(String s) {\n        // Your code here\n        return false;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -121,8 +121,8 @@ VALUES (
     E'def reverseString(s):\n    # Your code here - modify s in-place\n    s.reverse()\n    return s',
     E'function reverseString(s) {\n    // Your code here - modify s in-place\n    return s.reverse();\n}',
     E'func reverseString(s []string) []string {\n    // Your code here\n    return s\n}',
-    E'vector<string> reverseString(vector<string>& s) {\n    // Your code here\n    return s;\n}',
-    E'public String[] reverseString(String[] s) {\n    // Your code here\n    return s;\n}'
+    E'class Solution {\npublic:\n    vector<string> reverseString(vector<string>& s) {\n        // Your code here\n        return s;\n    }\n};',
+    E'class Solution {\n    public String[] reverseString(String[] s) {\n        // Your code here\n        return s;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -141,8 +141,8 @@ VALUES (
     E'def containsDuplicate(nums):\n    # Your code here\n    pass',
     E'function containsDuplicate(nums) {\n    // Your code here\n}',
     E'func containsDuplicate(nums []int) bool {\n    // Your code here\n    return false\n}',
-    E'bool containsDuplicate(vector<int>& nums) {\n    // Your code here\n    return false;\n}',
-    E'public boolean containsDuplicate(int[] nums) {\n    // Your code here\n    return false;\n}'
+    E'class Solution {\npublic:\n    bool containsDuplicate(vector<int>& nums) {\n        // Your code here\n        return false;\n    }\n};',
+    E'class Solution {\n    public boolean containsDuplicate(int[] nums) {\n        // Your code here\n        return false;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -162,8 +162,8 @@ VALUES (
     E'def search(nums, target):\n    # Your code here\n    pass',
     E'function search(nums, target) {\n    // Your code here\n}',
     E'func search(nums []int, target int) int {\n    // Your code here\n    return -1\n}',
-    E'int search(vector<int>& nums, int target) {\n    // Your code here\n    return -1;\n}',
-    E'public int search(int[] nums, int target) {\n    // Your code here\n    return -1;\n}'
+    E'class Solution {\npublic:\n    int search(vector<int>& nums, int target) {\n        // Your code here\n        return -1;\n    }\n};',
+    E'class Solution {\n    public int search(int[] nums, int target) {\n        // Your code here\n        return -1;\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -183,8 +183,8 @@ VALUES (
     E'def fizzBuzz(n):\n    # Your code here\n    pass',
     E'function fizzBuzz(n) {\n    // Your code here\n}',
     E'func fizzBuzz(n int) []string {\n    // Your code here\n    return nil\n}',
-    E'vector<string> fizzBuzz(int n) {\n    // Your code here\n    return {};\n}',
-    E'public String[] fizzBuzz(int n) {\n    // Your code here\n    return new String[]{};\n}'
+    E'class Solution {\npublic:\n    vector<string> fizzBuzz(int n) {\n        // Your code here\n        return {};\n    }\n};',
+    E'class Solution {\n    public String[] fizzBuzz(int n) {\n        // Your code here\n        return new String[]{};\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES
@@ -203,8 +203,8 @@ VALUES (
     E'def mergeSortedArrays(nums1, nums2):\n    # Your code here\n    pass',
     E'function mergeSortedArrays(nums1, nums2) {\n    // Your code here\n}',
     E'func mergeSortedArrays(nums1 []int, nums2 []int) []int {\n    // Your code here\n    return nil\n}',
-    E'vector<int> mergeSortedArrays(vector<int>& nums1, vector<int>& nums2) {\n    // Your code here\n    return {};\n}',
-    E'public int[] mergeSortedArrays(int[] nums1, int[] nums2) {\n    // Your code here\n    return new int[]{};\n}'
+    E'class Solution {\npublic:\n    vector<int> mergeSortedArrays(vector<int>& nums1, vector<int>& nums2) {\n        // Your code here\n        return {};\n    }\n};',
+    E'class Solution {\n    public int[] mergeSortedArrays(int[] nums1, int[] nums2) {\n        // Your code here\n        return new int[]{};\n    }\n}'
 );
 
 INSERT INTO test_cases (task_id, input, expected, is_hidden) VALUES

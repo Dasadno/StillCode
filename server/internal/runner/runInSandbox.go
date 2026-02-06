@@ -59,7 +59,7 @@ func RunInSandbox(ctx context.Context, language, code, input string) (stdout, st
 
 	case "java":
 		filename = "Main.java"
-		image = "openjdk:20-slim"
+		image = "eclipse-temurin:21-jdk-alpine"
 		compileCmd = []string{"javac", "Main.java"}
 		runCmd = []string{"java", "Main"}
 
@@ -71,7 +71,8 @@ func RunInSandbox(ctx context.Context, language, code, input string) (stdout, st
 	case "go", "golang":
 		filename = "main.go"
 		image = "golang:1.23-alpine"
-		runCmd = []string{"go", "run", filename}
+		compileCmd = []string{"go", "build", "-o", "main", filename}
+		runCmd = []string{"./main"}
 
 	default:
 		return "", "", 0, "error", fmt.Errorf("unsupported language: %s", language)
@@ -91,27 +92,50 @@ func RunInSandbox(ctx context.Context, language, code, input string) (stdout, st
 		}
 	}
 
+	// Determine resource limits (Go needs more for compilation)
+	pidsLimit := PidsLimit
+	memLimit := MemoryLimit
+	tmpfsSize := "64m"
+	if strings.ToLower(language) == "go" || strings.ToLower(language) == "golang" {
+		pidsLimit = "200"
+		memLimit = "512m"  // Go compiler needs more memory
+		tmpfsSize = "256m" // Go compiler needs more disk space
+	}
+
 	// Docker arguments with resource limits
 	dockerArgs := []string{
 		"run",
 		"--rm",
 		"-i", // Enable stdin
 		"--network", "none",
-		"--memory", MemoryLimit,
-		"--memory-swap", MemoryLimit,
+		"--memory", memLimit,
+		"--memory-swap", memLimit,
 		"--cpus", CPULimit,
-		"--pids-limit", PidsLimit,
+		"--pids-limit", pidsLimit,
 		"--read-only",
-		"--tmpfs", "/tmp:size=64m,mode=1777",
+		"--tmpfs", "/tmp:size=" + tmpfsSize + ",mode=1777",
 		"-v", tempDir + ":/app:rw",
 		"-w", "/app",
-		image,
 	}
+
+	// Add language-specific environment variables
+	switch strings.ToLower(language) {
+	case "go", "golang":
+		// Go needs a writable cache directory
+		dockerArgs = append(dockerArgs, "-e", "GOCACHE=/tmp/go-build", "-e", "GOPATH=/tmp/go")
+	}
+
+	dockerArgs = append(dockerArgs, image)
 
 	// Compilation step (if needed)
 	if len(compileCmd) > 0 {
+		// Go needs more time for first compilation (module downloads, cache build)
+		compileTimeout := 30 * time.Second
+		if strings.ToLower(language) == "go" || strings.ToLower(language) == "golang" {
+			compileTimeout = 60 * time.Second
+		}
 		compileArgs := append(dockerArgs, compileCmd...)
-		compileCtx, compileCancel := context.WithTimeout(ctx, 30*time.Second)
+		compileCtx, compileCancel := context.WithTimeout(ctx, compileTimeout)
 		defer compileCancel()
 
 		cmd := exec.CommandContext(compileCtx, "docker", compileArgs...)

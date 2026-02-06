@@ -75,17 +75,35 @@ export const storage = {
   },
 
   /**
-   * Get saved code for a task
+   * Get saved code for a task and language
    */
-  getCode(taskId) {
-    return this.get(STORAGE_KEYS.CODE_PREFIX + taskId) || '';
+  getCode(taskId, language = null) {
+    const lang = language || this.getLanguage();
+    const langKey = this.getLanguageKey(lang);
+    return this.get(STORAGE_KEYS.CODE_PREFIX + taskId + '_' + langKey) || '';
   },
 
   /**
-   * Save code for a task
+   * Save code for a task and language
    */
-  setCode(taskId, code) {
-    return this.set(STORAGE_KEYS.CODE_PREFIX + taskId, code);
+  setCode(taskId, code, language = null) {
+    const lang = language || this.getLanguage();
+    const langKey = this.getLanguageKey(lang);
+    return this.set(STORAGE_KEYS.CODE_PREFIX + taskId + '_' + langKey, code);
+  },
+
+  /**
+   * Convert display language to key
+   */
+  getLanguageKey(displayName) {
+    const map = {
+      'Python': 'python',
+      'C++': 'cpp',
+      'Java': 'java',
+      'JavaScript': 'javascript',
+      'Go': 'go'
+    };
+    return map[displayName] || displayName.toLowerCase();
   },
 
   /**

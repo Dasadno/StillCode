@@ -4,7 +4,7 @@
 
 import { initHeader } from '../components/header.js';
 import { auth } from '../services/auth.js';
-import { api } from '../services/api.js';
+import { api } from '../services/api.js?v=2';
 import { storage } from '../services/storage.js';
 
 // Global CodeMirror editor instance
@@ -26,8 +26,8 @@ function initCodeEditor() {
   if (!textarea) return;
 
   const taskId = getTaskIdFromURL();
-  const savedCode = taskId ? storage.getCode(taskId) : '';
   const savedLang = storage.getLanguage();
+  const savedCode = taskId ? storage.getCode(taskId, savedLang) : '';
 
   editor = CodeMirror.fromTextArea(textarea, {
     mode: getCodeMirrorMode(savedLang),
@@ -63,8 +63,9 @@ function initCodeEditor() {
   // Auto-save on change
   editor.on('change', () => {
     const taskId = getTaskIdFromURL();
+    const currentLang = storage.getLanguage();
     if (taskId) {
-      storage.setCode(taskId, editor.getValue());
+      storage.setCode(taskId, editor.getValue(), currentLang);
     }
   });
 
@@ -104,22 +105,32 @@ function getLanguageKey(displayName) {
   return map[displayName] || 'python';
 }
 
-// Load starter code for the selected language
-function loadStarterCodeForLanguage(displayLang) {
-  if (!currentTask || !currentTask.starterCode) return;
+// Load code for the selected language (saved or starter)
+function loadCodeForLanguage(displayLang) {
+  if (!currentTask) return;
 
   const taskId = getTaskIdFromURL();
-  const savedCode = taskId ? storage.getCode(taskId) : '';
+  const savedCode = taskId ? storage.getCode(taskId, displayLang) : '';
 
-  // Only load starter code if no saved code exists
-  if (savedCode && savedCode.trim() !== '') return;
-
-  const langKey = getLanguageKey(displayLang);
-  const starterCode = currentTask.starterCode[langKey];
-
-  if (starterCode && editor) {
-    editor.setValue(starterCode);
+  // If saved code exists for this language, load it
+  if (savedCode && savedCode.trim() !== '') {
+    if (editor) editor.setValue(savedCode);
+    return;
   }
+
+  // Otherwise load starter code
+  if (currentTask.starterCode) {
+    const langKey = getLanguageKey(displayLang);
+    const starterCode = currentTask.starterCode[langKey];
+    if (starterCode && editor) {
+      editor.setValue(starterCode);
+    }
+  }
+}
+
+// Legacy alias for backward compatibility
+function loadStarterCodeForLanguage(displayLang) {
+  loadCodeForLanguage(displayLang);
 }
 
 function initUI() {
@@ -162,12 +173,28 @@ function initLanguageDropdown() {
     li.addEventListener('click', (e) => {
       e.stopPropagation();
       const lang = li.textContent.trim();
+      const currentLang = languageLabel?.textContent?.trim();
+
+      // Skip if same language
+      if (lang === currentLang) {
+        langDropdown.classList.add('hidden');
+        return;
+      }
+
+      // Save current code before switching
+      const taskId = getTaskIdFromURL();
+      if (taskId && editor && currentLang) {
+        storage.setCode(taskId, editor.getValue(), currentLang);
+      }
+
+      // Switch language
       if (languageLabel) languageLabel.textContent = lang;
       langDropdown.classList.add('hidden');
       storage.setLanguage(lang);
       setEditorLanguage(lang);
-      // Load starter code for the new language
-      loadStarterCodeForLanguage(lang);
+
+      // Load code for the new language
+      loadCodeForLanguage(lang);
     });
   });
 
@@ -184,7 +211,24 @@ function renderTask(task) {
   const sideEl = document.getElementById('taskInfo');
 
   if (titleEl) titleEl.textContent = task.title;
-  if (descEl) descEl.textContent = task.description;
+
+  // Render description as markdown
+  if (descEl) {
+    if (typeof marked !== 'undefined') {
+      marked.setOptions({
+        highlight: function(code, lang) {
+          if (typeof hljs !== 'undefined' && lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(code, { language: lang }).value;
+          }
+          return code;
+        },
+        breaks: true
+      });
+      descEl.innerHTML = marked.parse(task.description || '');
+    } else {
+      descEl.textContent = task.description;
+    }
+  }
 
   if (metaEl) {
     // Clear existing content
@@ -224,25 +268,47 @@ function renderTask(task) {
 
     task.test_cases.forEach((tc, i) => {
       const block = document.createElement('div');
-      block.className = 'mb-2 p-2 border-b border-gray-700';
+      block.className = 'mb-3 p-3 bg-secondary-darker rounded-lg border border-gray-600';
 
       const testTitle = document.createElement('div');
-      testTitle.className = 'text-green-400 font-bold';
-      testTitle.textContent = 'Test #' + (i + 1);
+      testTitle.className = 'text-green-400 font-bold mb-2 flex items-center';
+      testTitle.innerHTML = '<i class="fas fa-flask mr-2"></i>Example ' + (i + 1);
 
+      // Parse and format input
       const inputDiv = document.createElement('div');
-      const inputLabel = document.createElement('span');
-      inputLabel.className = 'text-blue-400';
-      inputLabel.textContent = 'Input: ';
-      inputDiv.appendChild(inputLabel);
-      inputDiv.appendChild(document.createTextNode(tc.input));
+      inputDiv.className = 'mb-1';
+      try {
+        const inputData = JSON.parse(tc.input);
+        Object.entries(inputData).forEach(([key, value]) => {
+          const paramLine = document.createElement('div');
+          const keySpan = document.createElement('span');
+          keySpan.className = 'text-blue-400';
+          keySpan.textContent = key + ' = ';
+          const valueSpan = document.createElement('span');
+          valueSpan.className = 'text-gray-300';
+          valueSpan.textContent = JSON.stringify(value);
+          paramLine.appendChild(keySpan);
+          paramLine.appendChild(valueSpan);
+          inputDiv.appendChild(paramLine);
+        });
+      } catch {
+        const inputLabel = document.createElement('span');
+        inputLabel.className = 'text-blue-400';
+        inputLabel.textContent = 'Input: ';
+        inputDiv.appendChild(inputLabel);
+        inputDiv.appendChild(document.createTextNode(tc.input));
+      }
 
       const expectedDiv = document.createElement('div');
+      expectedDiv.className = 'mt-2 pt-2 border-t border-gray-700';
       const expectedLabel = document.createElement('span');
       expectedLabel.className = 'text-yellow-400';
-      expectedLabel.textContent = 'Expected: ';
+      expectedLabel.textContent = 'Output: ';
+      const expectedValue = document.createElement('span');
+      expectedValue.className = 'text-gray-300';
+      expectedValue.textContent = tc.expected;
       expectedDiv.appendChild(expectedLabel);
-      expectedDiv.appendChild(document.createTextNode(tc.expected));
+      expectedDiv.appendChild(expectedValue);
 
       block.appendChild(testTitle);
       block.appendChild(inputDiv);
@@ -306,6 +372,7 @@ async function onRunClicked() {
   setLoading(runBtn, true, 'Running...');
 
   const code = getEditorCode();
+  const taskId = getTaskIdFromURL();
   const testCases = currentTask?.test_cases || [];
   const input = testCases.length ? testCases[0].input : '';
 
@@ -313,7 +380,8 @@ async function onRunClicked() {
     const result = await api.runCode({
       language: getSelectedLanguage(),
       code,
-      input
+      input,
+      taskId: taskId ? Number(taskId) : undefined
     });
 
     showOutput(formatRunResponse(result));
@@ -512,9 +580,9 @@ async function loadTask(id) {
     const task = await api.getTask(id);
     currentTask = task;
     renderTask(task);
-    // Load starter code for the current language
+    // Load code for the current language (saved or starter)
     const currentLang = storage.getLanguage() || 'Python';
-    loadStarterCodeForLanguage(currentLang);
+    loadCodeForLanguage(currentLang);
   } catch (err) {
     showOutput('Failed to load task: ' + err.message);
   }

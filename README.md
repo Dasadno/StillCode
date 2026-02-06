@@ -15,12 +15,6 @@ A LeetCode-like competitive programming platform with real-time code execution i
 docker compose up -d
 ```
 
-This starts PostgreSQL with:
-- Database: `stillcode`
-- User: `stillcode_user`
-- Password: `stillcode_secret_password`
-- Port: `5432`
-
 The database is automatically initialized with schema and seeded with 35 algorithmic tasks.
 
 ### 2. Pull Code Execution Images
@@ -28,7 +22,7 @@ The database is automatically initialized with schema and seeded with 35 algorit
 ```bash
 docker pull python:3.11-slim
 docker pull gcc:12
-docker pull openjdk:20-slim
+docker pull eclipse-temurin:21-jdk-alpine
 docker pull node:20-slim
 docker pull golang:1.23-alpine
 ```
@@ -36,8 +30,7 @@ docker pull golang:1.23-alpine
 ### 3. Run the Server
 
 ```bash
-cd StillCode
-go run server/cmd/main.go
+ go run server/cmd/main.go
 ```
 
 Server starts at `http://localhost:8080`
@@ -137,18 +130,6 @@ Each submission runs in an isolated Docker container:
 - **Timeout**: 5 seconds
 - **Network**: Disabled
 - **Filesystem**: Read-only + 64MB tmpfs
-
-## Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DB_HOST` | localhost | Database host |
-| `DB_PORT` | 5433 | Database port (Docker) |
-| `DB_USER` | stillcode_user | Database user |
-| `DB_PASSWORD` | stillcode_secret_password | Database password |
-| `DB_NAME` | stillcode | Database name |
-| `PORT` | 8080 | Server port |
-| `CORS_ORIGIN` | * | CORS allowed origin |
 
 ## Security
 

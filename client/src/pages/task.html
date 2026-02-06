@@ -20,6 +20,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
 
+  <!-- Marked.js for markdown rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+  <!-- Highlight.js for code syntax highlighting in markdown -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -61,6 +67,40 @@
       flex-direction: column;
       min-height: 300px;
     }
+    /* Markdown styles */
+    #taskDescription h1, #taskDescription h2, #taskDescription h3 {
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    #taskDescription h1 { font-size: 1.5rem; }
+    #taskDescription h2 { font-size: 1.25rem; }
+    #taskDescription h3 { font-size: 1.1rem; }
+    #taskDescription p { margin-bottom: 0.75rem; }
+    #taskDescription code {
+      background: #2d2d2d;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9em;
+    }
+    #taskDescription pre {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+    }
+    #taskDescription pre code {
+      background: transparent;
+      padding: 0;
+    }
+    #taskDescription ul, #taskDescription ol {
+      margin-left: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    #taskDescription li { margin-bottom: 0.25rem; }
+    #taskDescription strong { color: #ff6666; }
   </style>
 </head>
 <body class="bg-dark text-light min-h-screen font-sans flex flex-col antialiased">
@@ -145,6 +185,6 @@
     </div>
   </footer>
 
-  <script type="module" src="/src/scripts/task.js"></script>
+  <script type="module" src="/src/scripts/task.js?v=2"></script>
 </body>
 </html>

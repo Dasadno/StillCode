@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"log"
 	"strings"
 )
 
@@ -26,9 +27,20 @@ func NewSubmissionService(taskService *TaskService) *SubmissionService {
 	}
 }
 
-// RunCode executes code with optional input and returns the result (raw execution, no wrapping)
+// RunCode executes code with optional input and returns the result
+// If TaskID is provided, the code will be wrapped with the task's function template
 func (s *SubmissionService) RunCode(ctx context.Context, req *models.RunCodeRequest) (*models.RunCodeResponse, error) {
-	stdout, stderr, timeMs, status, err := runner.RunInSandbox(ctx, req.Language, req.Code, req.Input)
+	code := req.Code
+
+	// If TaskID is provided, wrap the code with the task template
+	if req.TaskID > 0 {
+		task, err := s.taskService.GetTaskForSubmission(req.TaskID)
+		if err == nil && task.FunctionName != "" {
+			code = s.wrapCode(req.Language, req.Code, task.FunctionName, task.Params)
+		}
+	}
+
+	stdout, stderr, timeMs, status, err := runner.RunInSandbox(ctx, req.Language, code, req.Input)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +165,14 @@ func (s *SubmissionService) wrapCode(language, code, functionName, paramsJSON st
 		return code
 	}
 
-	return runner.WrapUserCode(language, code, functionName, params)
+	wrapped := runner.WrapUserCode(language, code, functionName, params)
+	// Debug: log wrapped code for Go
+	if language == "go" {
+		log.Println("=== WRAPPED GO CODE ===")
+		log.Println(wrapped)
+		log.Println("=== END WRAPPED CODE ===")
+	}
+	return wrapped
 }
 
 // formatStderr appends stderr if present

@@ -18,6 +18,7 @@ type RunCodeRequest struct {
 	Language string `json:"language" binding:"required"`
 	Code     string `json:"code" binding:"required"`
 	Input    string `json:"input"`
+	TaskID   int    `json:"taskId"` // Optional: if provided, code will be wrapped with task template
 }
 
 // SubmitSolutionRequest represents the request to submit a solution

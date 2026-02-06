@@ -18,7 +18,15 @@ import (
 
 const pythonTemplate = `import json
 import sys
-from typing import List, Optional
+from typing import List, Optional, Dict, Set, Tuple, Any
+from collections import defaultdict, Counter, deque, OrderedDict
+from heapq import heappush, heappop, heapify, heappushpop, nlargest, nsmallest
+from bisect import bisect_left, bisect_right, insort_left, insort_right
+from functools import lru_cache, reduce
+from itertools import permutations, combinations, product, accumulate
+import math
+import re
+import string
 
 # User's solution
 {USER_CODE}
@@ -57,8 +65,20 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"math"
 	"os"
+	"sort"
+	"strconv"
+	"strings"
+	"unicode"
 )
+
+// Suppress unused import errors
+var _ = math.MaxInt
+var _ = sort.Ints
+var _ = strconv.Itoa
+var _ = strings.Contains
+var _ = unicode.IsLetter
 
 // User's solution
 {USER_CODE}
@@ -653,8 +673,8 @@ int main() {
 
 // InputParam represents a parameter in the function signature
 type InputParam struct {
-	Name string // Parameter name (e.g., "nums", "target")
-	Type string // Parameter type (e.g., "[]int", "int", "string", "[][]int")
+	Name string `json:"name"` // Parameter name (e.g., "nums", "target")
+	Type string `json:"type"` // Parameter type (e.g., "[]int", "int", "string", "[][]int")
 }
 
 // WrapUserCode wraps user code with the appropriate language template
@@ -797,8 +817,11 @@ func wrapJava(userCode, functionName string, params []InputParam) string {
 	// Determine result type (simplified - would need more context in real impl)
 	resultType := "Object"
 
+	// Transform "class Solution" to "static class Solution" for inner class
+	modifiedCode := strings.Replace(userCode, "class Solution", "static class Solution", 1)
+
 	code := javaTemplateSimple
-	code = strings.Replace(code, "{USER_CODE}", userCode, 1)
+	code = strings.Replace(code, "{USER_CODE}", modifiedCode, 1)
 	code = strings.Replace(code, "{FUNCTION_NAME}", functionName, 1)
 	code = strings.Replace(code, "{ARG_PARSING}", strings.Join(parsing, "\n            "), 1)
 	code = strings.Replace(code, "{RESULT_TYPE}", resultType, 1)

@@ -137,10 +137,10 @@ export const api = {
   /**
    * Run code with input
    */
-  async runCode({ language, code, input }) {
+  async runCode({ language, code, input, taskId }) {
     const response = await request('/api/run', {
       method: 'POST',
-      body: JSON.stringify({ language, code, input })
+      body: JSON.stringify({ language, code, input, taskId })
     });
 
     if (response.status === 429) {

@@ -4,6 +4,7 @@ import (
 	"StillCode/server/internal/models"
 	"StillCode/server/internal/services"
 	"errors"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -29,6 +30,10 @@ func (h *SubmissionHandler) RunCode(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, models.ErrorResponse{Error: "Invalid request format"})
 		return
 	}
+
+	// Debug: log incoming request
+	log.Printf("=== RUN REQUEST === Lang: %s, TaskID: %d, Code length: %d", req.Language, req.TaskID, len(req.Code))
+	log.Printf("=== USER CODE ===\n%s\n=== END USER CODE ===", req.Code)
 
 	result, err := h.submissionService.RunCode(c.Request.Context(), &req)
 	if err != nil {
