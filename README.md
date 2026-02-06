@@ -1,5 +1,5 @@
 # StillCode
-
+This is MVP version
 A LeetCode-like competitive programming platform with real-time code execution in a sandboxed environment.
 
 ## Quick Start
@@ -138,7 +138,3 @@ Each submission runs in an isolated Docker container:
 - Rate limiting (10 req/min for code execution)
 - Docker isolation with resource limits
 - Input size validation
-
-## License
-
-MIT
